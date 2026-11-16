@@ -1,0 +1,17 @@
+export interface FieldError {
+  field: string;
+  message: string;
+}
+
+/** An error that is safe to show to API clients. */
+export class AppError extends Error {
+  constructor(
+    public readonly statusCode: number,
+    public readonly code: string,
+    message: string,
+    public readonly details?: FieldError[],
+  ) {
+    super(message);
+    this.name = 'AppError';
+  }
+}
